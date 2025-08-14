@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <BaseOutputPath>..\..\..\..\bin</BaseOutputPath>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>..\..\..\..\doc\NDSH.xml</DocumentationFile>
+    <RootNamespace>NDSH</RootNamespace>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>8</WarningLevel>
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+    <Deterministic>True</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningLevel>8</WarningLevel>
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+    <Deterministic>True</Deterministic>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+    <Compile Remove="Text\StringAllocator.cs" />
+    <Compile Remove="Text\StringComparerStruct.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Properties\AssemblyInfo.cs" />
+    <None Include="Text\StringAllocator.cs" />
+    <None Include="Text\StringComparerStruct.cs" />
+  </ItemGroup>
+
+</Project>
