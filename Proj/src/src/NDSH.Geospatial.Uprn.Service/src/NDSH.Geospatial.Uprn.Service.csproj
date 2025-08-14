@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -15,15 +15,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Properties\launchSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
     <PackageReference Include="OgcApi.Net" Version="1.1.2" />
     <PackageReference Include="OgcApi.Net.PostGis" Version="1.1.2" />
     <PackageReference Include="OgcApi.Net.Schemas" Version="1.1.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Geospatial\Uprn\Service\" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.1" />
   </ItemGroup>
 
 </Project>
