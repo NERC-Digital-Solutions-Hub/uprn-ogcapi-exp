@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <BaseOutputPath>..\..\..\..\Bin</BaseOutputPath>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>..\..\..\..\Doc\NDSH.Database.60.xml</DocumentationFile>
+    <AssemblyName>NDSH.Database</AssemblyName>
+    <RootNamespace>NDSH.Database</RootNamespace>
+  </PropertyGroup>
+
+</Project>
