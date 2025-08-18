@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using NDSH.Geospatial.Uprn.Service;
+using NDSH.Geospatial.Uprn.Service.Middleware;
 using NDSH.Geospatial.Uprn.Service.Security;
 using OgcApi.Net;
 using OgcApi.Net.OpenApi;
@@ -44,6 +45,7 @@ app.UseSwaggerUI(swaggerOptions => {
 });
 
 app.UseRouting();
+app.UseMiddleware<FieldsFilterMiddleware>();
 app.MapControllers();
 
 app.UseCors("OgcApi");
