@@ -10,6 +10,7 @@ using OgcApi.Net.OpenApi;
 using OgcApi.Net.Options;
 using OgcApi.Net.PostGis;
 using OgcApi.Net.Schemas;
+using System.Text.Json.Nodes;
 // using ServiceDefaults;  // Make sure this is included into the project or done as a separate project
 
 var builder = WebApplication.CreateBuilder(args);
@@ -45,7 +46,11 @@ app.UseSwaggerUI(swaggerOptions => {
 });
 
 app.UseRouting();
+
+app.UseMiddleware<SwaggerJsonModifierMiddleware>("/api/ogc/swagger.json");
+
 app.UseMiddleware<FieldsFilterMiddleware>();
+
 app.MapControllers();
 
 app.UseCors("OgcApi");
