@@ -59,18 +59,17 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
       memoryStream.Seek(0, SeekOrigin.Begin);
       var jsonDoc = await JsonNode.ParseAsync(memoryStream);
 
-      if (jsonDoc is JsonObject root && root.ContainsKey("features")) {
-        var features = root["features"] as JsonArray;
-        if (features != null) {
-          foreach (var feature in features.OfType<JsonObject>()) {
-            if (feature.ContainsKey("properties") && feature["properties"] is JsonObject props) {
-              foreach (var key in props.Select(p => p.Key).ToList()) {
-                if (!fields.Contains(key)) {
-                  props.Remove(key);
-                }
-              }
+      if (jsonDoc is JsonObject root) {
+        if (root.ContainsKey("features")) {
+          var features = root["features"] as JsonArray;
+          if (features != null) {
+            foreach (var feature in features.OfType<JsonObject>()) {
+              FilterProperties(feature, fields);
             }
           }
+        }
+        else {
+          FilterProperties(root, fields);
         }
       }
 
@@ -79,6 +78,16 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
       context.Response.ContentType = "application/geo+json";
       await context.Response.WriteAsync(jsonDoc.ToJsonString());
 
+    }
+
+    void FilterProperties(JsonObject feature, HashSet<string> fields) {
+      if (feature.ContainsKey("properties") && feature["properties"] is JsonObject props) {
+        foreach (var key in props.Select(p => p.Key).ToList()) {
+          if (!fields.Contains(key)) {
+            props.Remove(key);
+          }
+        }
+      }
     }
   }
 }
