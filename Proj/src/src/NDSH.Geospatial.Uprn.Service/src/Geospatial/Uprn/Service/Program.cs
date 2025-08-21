@@ -6,6 +6,7 @@ using NDSH.Geospatial.Uprn.Service;
 using NDSH.Geospatial.Uprn.Service.Middleware;
 using NDSH.Geospatial.Uprn.Service.Security;
 using OgcApi.Net;
+using OgcApi.Net.Controllers;
 using OgcApi.Net.OpenApi;
 using OgcApi.Net.Options;
 using OgcApi.Net.PostGis;
@@ -30,6 +31,8 @@ builder.Services.AddSingleton<IOpenApiGenerator, OpenApiGenerator>();
 
 builder.Services.AddControllers().AddOgcApiControllers();
 
+builder.Services.AddHttpClient();  // Needed for the FeatureIntersectionMiddleware to make HTTP requests
+
 builder.Services.AddCors(c => c.AddPolicy(name: "OgcApi", options => {
   options.AllowAnyMethod().AllowAnyHeader();
 }));
@@ -48,6 +51,8 @@ app.UseSwaggerUI(swaggerOptions => {
 app.UseRouting();
 
 app.UseMiddleware<SwaggerJsonModifierMiddleware>("/api/ogc/swagger.json");
+
+app.UseMiddleware<FeatureIntersectionMiddleware>();
 
 app.UseMiddleware<FieldsFilterMiddleware>();
 
