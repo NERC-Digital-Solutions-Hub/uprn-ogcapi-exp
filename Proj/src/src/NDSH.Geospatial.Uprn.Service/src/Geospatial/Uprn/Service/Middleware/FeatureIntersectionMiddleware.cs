@@ -35,7 +35,7 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
       var selectorIds = context.Request.Query["selectorIds"].ToString().Split(',').Select(int.Parse).ToList();
 
       var requestCrs = context.Request.Query.TryGetValue("crs", out StringValues requestCrsVals)
-          ? new Uri(requestCrsVals.ToString())
+          ? requestCrsVals.ToString()
           : null;
       var requestApiKey = context.Request.Query.TryGetValue("apiKey", out StringValues requestApiKeyVals)
           ? requestApiKeyVals.ToString()
@@ -49,8 +49,9 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
 
       var resultList = new List<Geometry>();
       foreach (var id in selectorIds) {
-        var url = $"{context.Request.Scheme}://{context.Request.Host}/api/ogc/collections/{selectorSource}/items/{id}";  // TODO: check if correct in debugger
-        var selectorIdJson = await _http.GetStringAsync(url);
+        var url = $"{context.Request.Scheme}://{context.Request.Host}/api/ogc/collections/{selectorSource}/items/{id}";
+        var selectorQueryString = $"?crs={requestCrs}";
+        var selectorIdJson = await _http.GetStringAsync(url + selectorQueryString);
         var feature = JsonSerializer.Deserialize<IFeature>(selectorIdJson, jsonSerializerOptions);
 
         if (feature != null && feature.Geometry != null) {
@@ -88,7 +89,8 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
       var newQuery = context.Request.Query
         .Where(kvp => kvp.Key != "selectorSource" && kvp.Key != "selectorIds")
         .SelectMany(kvp => kvp.Value, (kvp, val) => new KeyValuePair<string, string?>(kvp.Key, val))
-        .Append(new KeyValuePair<string, string?>("bbox", bbox));
+        .Append(new KeyValuePair<string, string?>("bbox", bbox))
+        .Append(new KeyValuePair<string, string?>("bbox-crs", requestCrs));
       context.Request.QueryString = QueryString.Create(newQuery);
 
       var originalBody = context.Response.Body;
@@ -104,8 +106,7 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
         if (root.ContainsKey("features")) {
           var featuresArray = root["features"] as JsonArray;
           if (featuresArray != null) {
-            var featuresInBbox = new List<Geometry>();
-            foreach (var featureNode in featuresArray.OfType<JsonObject>()) {
+            foreach (var featureNode in featuresArray.OfType<JsonObject>().ToList()) {
               if (featureNode.TryGetPropertyValue("geometry", out var geometryNode) && geometryNode != null) {
                 var featureGeometry = JsonSerializer.Deserialize<Geometry>(geometryNode.ToJsonString(), jsonSerializerOptions);
                 if (!selectorUnion.Intersects(featureGeometry)) {
@@ -113,6 +114,13 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
                 }
               }
             }
+          }
+          int featureNumber = featuresArray.Count;
+          if (root.ContainsKey("numberMatched")) {
+            root["numberMatched"] = featureNumber;
+          }
+          if (root.ContainsKey("numberReturned")) {
+            root["numberReturned"] = featureNumber;
           }
         }
       }

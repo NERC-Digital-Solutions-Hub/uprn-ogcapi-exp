@@ -45,7 +45,7 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
         var baseUri = new Uri($"{context.Request.Scheme}://{context.Request.Host}/api/ogc");
         var doc = _generator.GetDocument(baseUri);
 
-        // Add 'fields' query parameter to /items and /items/{id} paths
+        // Add 'fields' query parameter to /items and /items/{featureId} endpoints
         foreach (var pathKvp in doc.Paths.Where(p => p.Key.Contains("/items"))) {
           var pathItem = pathKvp.Value;
           foreach (var op in pathItem.Operations.Values) {
@@ -60,6 +60,7 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
             }
           }
         }
+        // Add 'selectorSource', 'selectorIds', and 'compress' query parameters to /items endpoints
         foreach (var pathKvp in doc.Paths.Where(p => p.Key.EndsWith("/items"))) {
           var pathItem = pathKvp.Value;
           foreach (var op in pathItem.Operations.Values) {
@@ -76,6 +77,14 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
                 Name = "selectorIds",
                 In = ParameterLocation.Query,
                 Description = "Comma-separated list of IDs from the source endpoint to select features from the queried endpoint",
+                Required = false
+              });
+            }
+            if (!op.Parameters.Any(p => p.Name == "compress")) {
+              op.Parameters.Add(new OpenApiParameter {
+                Name = "compress",
+                In = ParameterLocation.Query,
+                Description = "If set to 'true', the response will be compressed using GZip and served as a downloadable file. Use this for large responses.",
                 Required = false
               });
             }

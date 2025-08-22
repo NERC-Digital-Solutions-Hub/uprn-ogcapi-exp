@@ -52,9 +52,13 @@ app.UseRouting();
 
 app.UseMiddleware<SwaggerJsonModifierMiddleware>("/api/ogc/swagger.json");
 
-app.UseMiddleware<FeatureIntersectionMiddleware>();
+
+
+app.UseMiddleware<GeoJsonCompressionMiddleware>();
 
 app.UseMiddleware<FieldsFilterMiddleware>();
+
+app.UseMiddleware<FeatureIntersectionMiddleware>();
 
 app.MapControllers();
 
