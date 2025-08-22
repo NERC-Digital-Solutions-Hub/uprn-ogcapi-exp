@@ -67,7 +67,7 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
               op.Parameters.Add(new OpenApiParameter {
                 Name = "selectorSource",
                 In = ParameterLocation.Query,
-                Description = "The source endpoint of features to use for selecting from the queried endpoint, e.g., 'evi-cells'",
+                Description = "The source endpoint of features to use for selecting from the queried endpoint, e.g., 'evi-cells'. Only endpoints returning IPolygonal features will work.",
                 Required = false
               });
             }
