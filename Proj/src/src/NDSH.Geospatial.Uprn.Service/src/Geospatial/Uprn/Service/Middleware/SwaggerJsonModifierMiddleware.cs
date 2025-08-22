@@ -60,6 +60,27 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
             }
           }
         }
+        foreach (var pathKvp in doc.Paths.Where(p => p.Key.EndsWith("/items"))) {
+          var pathItem = pathKvp.Value;
+          foreach (var op in pathItem.Operations.Values) {
+            if (!op.Parameters.Any(p => p.Name == "selectorSource")) {
+              op.Parameters.Add(new OpenApiParameter {
+                Name = "selectorSource",
+                In = ParameterLocation.Query,
+                Description = "The source endpoint of features to use for selecting from the queried endpoint, e.g., 'evi-cells'",
+                Required = false
+              });
+            }
+            if (!op.Parameters.Any(p => p.Name == "selectorIds")) {
+              op.Parameters.Add(new OpenApiParameter {
+                Name = "selectorIds",
+                In = ParameterLocation.Query,
+                Description = "Comma-separated list of IDs from the source endpoint to select features from the queried endpoint",
+                Required = false
+              });
+            }
+          }
+        }
 
         _cachedJson = doc.SerializeAsJson(Microsoft.OpenApi.OpenApiSpecVersion.OpenApi3_0);
       }
