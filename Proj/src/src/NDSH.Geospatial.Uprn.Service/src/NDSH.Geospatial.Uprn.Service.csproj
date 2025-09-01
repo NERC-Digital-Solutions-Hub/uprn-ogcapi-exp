@@ -21,10 +21,13 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
-    <PackageReference Include="OgcApi.Net" Version="1.1.2" />
-    <PackageReference Include="OgcApi.Net.PostGis" Version="1.1.2" />
-    <PackageReference Include="OgcApi.Net.Schemas" Version="1.1.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\ogcapi-count-exp\Proj\src\src\Common\OgcApi.Net\OgcApi.Net.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\ogcapi-count-exp\Proj\src\src\Common\Standards\OgcApi.Net.Schemas\OgcApi.Net.Schemas.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\ogcapi-count-exp\Proj\src\src\Providers\OgcApi.Net.PostGis\OgcApi.Net.PostGis.csproj" />
   </ItemGroup>
 
 </Project>

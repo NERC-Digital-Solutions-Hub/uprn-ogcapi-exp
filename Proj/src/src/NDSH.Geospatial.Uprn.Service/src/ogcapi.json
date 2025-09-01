@@ -16,6 +16,7 @@
             {
                 "Id": "uprn",
                 "Title": "UPRNs",
+                "CalculateNumberMatched": false,
                 "Extent": {
                     "Spatial": {
                         "Bbox": [
@@ -295,6 +296,7 @@
             {
                 "Id": "carbon-values-uprn",
                 "Title": "Carbon Values - UPRN",
+                "CalculateNumberMatched": false,
                 "Extent": {
                     "Spatial": {
                         "Bbox": [
@@ -323,9 +325,9 @@
                         "GeometryDataType": "geometry",
                         "GeometryGeoJsonType": "Point",
                         "GeometrySrid": 27700,
-                        "IdentifierColumn": "objectid",
+                        "IdentifierColumn": "uprn",
                         "Properties": [
-                            "uprn",
+                            "objectid",
                             "corcoef",
                             "devianceweighted",
                             "downdistinct",
@@ -347,6 +349,7 @@
             {
                 "Id": "evi-values-uprn",
                 "Title": "Ellenberg Vegetation Indicator Values - UPRN",
+                "CalculateNumberMatched": false,
                 "Extent": {
                     "Spatial": {
                         "Bbox": [
@@ -375,9 +378,9 @@
                         "GeometryDataType": "geometry",
                         "GeometryGeoJsonType": "Point",
                         "GeometrySrid": 27700,
-                        "IdentifierColumn": "objectid",
+                        "IdentifierColumn": "uprn",
                         "Properties": [
-                            "uprn",
+                            "objectid",
                             "moistcoverweight1519",
                             "moistcoverweight90",
                             "moistcoverweightdiff",
