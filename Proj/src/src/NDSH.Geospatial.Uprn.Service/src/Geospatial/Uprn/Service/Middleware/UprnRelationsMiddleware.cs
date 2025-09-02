@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
+using NDSH.Geospatial.Uprn.Service.Middleware.Utils;
 using NetTopologySuite.IO.Converters;
 using System.Text.Json.Nodes;
 
@@ -28,6 +29,19 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
       }
 
       var relationSources = context.Request.Query["relationSources"].ToString().Split(',').Select(s => s.Trim()).ToList();
+
+      bool hasRelationSourceFields = context.Request.Query.ContainsKey("relationSourceFields");
+      Dictionary<string, HashSet<string>>? relationSourceFields;
+      if (hasRelationSourceFields) {
+        var relationSourceFieldStrings = context.Request.Query["relationSourceFields"].ToString().Split(';').Select(s => s.Trim()).ToList();
+        var relationSourceFieldLists = relationSourceFieldStrings
+          .Select(s => s.Split(',').Select(f => f.Trim()).ToHashSet());
+        relationSourceFields = relationSources.Zip(relationSourceFieldLists, (source, fields) => new { source, fields })
+          .ToDictionary(x => x.source, x => x.fields);
+      }
+      else {
+        relationSourceFields = null;
+      }
 
       var requestCrs = context.Request.Query.TryGetValue("crs", out StringValues requestCrsVals)
         ? requestCrsVals.ToString()
@@ -85,6 +99,9 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
         }
         var relationResultJson = JsonNode.Parse(relationResultString) as JsonObject;
         try {
+          if (hasRelationSourceFields) {
+            MiddlewareUtils.FilterProperties(relationResultJson, relationSourceFields[relationSources[i]]);
+          }
           relationResults[relationSources[i]] = relationResultJson["properties"].DeepClone();
         }
         catch {
