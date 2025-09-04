@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - count_timeout
+      - ogcapi-count-exp
 
 jobs:
   run-api:
