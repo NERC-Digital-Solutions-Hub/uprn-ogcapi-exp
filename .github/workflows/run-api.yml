@@ -19,10 +19,10 @@ jobs:
           dotnet-version: '9.0'
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore --project Proj/src/src/NDSH.Geospatial.Uprn.Service/src/NDSH.Geospatial.Uprn.Service.csproj
 
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build --no-restore --project Proj/src/src/NDSH.Geospatial.Uprn.Service/src/NDSH.Geospatial.Uprn.Service.csproj
 
       - name: Run API
         run: nohup dotnet run --no-build --project Proj/src/src/NDSH.Geospatial.Uprn.Service/src/NDSH.Geospatial.Uprn.Service.csproj > api.log 2>&1 &
