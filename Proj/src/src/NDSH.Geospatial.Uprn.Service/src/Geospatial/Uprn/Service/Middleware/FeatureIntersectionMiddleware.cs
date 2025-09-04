@@ -50,7 +50,13 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
       var resultList = new List<Geometry>();
       foreach (var id in selectorIds) {
         var url = $"{context.Request.Scheme}://{context.Request.Host}/api/ogc/collections/{selectorSource}/items/{id}";
-        var selectorQueryString = $"?crs={requestCrs}";
+        string selectorQueryString;
+        if (requestCrs != null) {
+          selectorQueryString = $"?crs={requestCrs}";
+        }
+        else {
+          selectorQueryString = "";
+        }
         var selectorIdJson = await _http.GetStringAsync(url + selectorQueryString);
         var feature = JsonSerializer.Deserialize<IFeature>(selectorIdJson, jsonSerializerOptions);
 

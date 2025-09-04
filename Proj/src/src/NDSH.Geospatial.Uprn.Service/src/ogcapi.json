@@ -16,6 +16,7 @@
             {
                 "Id": "uprn",
                 "Title": "UPRNs",
+                "CalculateNumberMatched": false,
                 "Extent": {
                     "Spatial": {
                         "Bbox": [
@@ -87,33 +88,13 @@
                         "GeometryDataType": "geometry",
                         "GeometryGeoJsonType": "MultiPolygon",
                         "GeometrySrid": 27700,
-                        "IdentifierColumn": "objectid",
+                        "IdentifierColumn": "gridcode",
                         "Properties": [
+                            "objectid",
                             "gridcode",
                             "shape_length",
                             "shape_area"
                         ]
-                    }
-                },
-                "SchemaOptions": {
-                    "Title": "Carbon Cells",
-                    "Description": "Polygon cells containing a singular Carbon value each.",
-                    "Properties": {
-                        "gridcode": {
-                            "Title": "Grid Code",
-                            "Description": "Code of the grid cell the feature falls into.",
-                            "Type": "integer"
-                        },
-                        "shape_length": {
-                            "Title": "Shape Length",
-                            "Description": "Perimeter of the polygon feature.",
-                            "Type": "number"
-                        },
-                        "shape_area": {
-                            "Title": "Shape Area",
-                            "Description": "Area of the polygon feature.",
-                            "Type": "number"
-                        }
                     }
                 }
             },
@@ -148,33 +129,13 @@
                         "GeometryDataType": "geometry",
                         "GeometryGeoJsonType": "MultiPolygon",
                         "GeometrySrid": 27700,
-                        "IdentifierColumn": "objectid",
+                        "IdentifierColumn": "gridcode",
                         "Properties": [
+                            "objectid",
                             "gridcode",
                             "shape_length",
                             "shape_area"
                         ]
-                    }
-                },
-                "SchemaOptions": {
-                    "Title": "Ellenberg Vegetation Indicator Cells",
-                    "Description": "Polygon cells containins a singular Ellenberg Vegetation Indicator value each.",
-                    "Properties": {
-                        "gridcode": {
-                            "Title": "Grid Code",
-                            "Description": "Code of the grid cell the feature falls into.",
-                            "Type": "integer"
-                        },
-                        "shape_length": {
-                            "Title": "Shape Length",
-                            "Description": "Perimeter of the polygon feature.",
-                            "Type": "number"
-                        },
-                        "shape_area": {
-                            "Title": "Shape Area",
-                            "Description": "Area of the polygon feature.",
-                            "Type": "number"
-                        }
                     }
                 }
             },
@@ -209,8 +170,9 @@
                         "GeometryDataType": "geometry",
                         "GeometryGeoJsonType": "MultiPolygon",
                         "GeometrySrid": 27700,
-                        "IdentifierColumn": "objectid",
+                        "IdentifierColumn": "gridcode",
                         "Properties": [
+                            "objectid",
                             "gridcode",
                             "corcoef",
                             "devianceweighted",
@@ -261,8 +223,9 @@
                         "GeometryDataType": "geometry",
                         "GeometryGeoJsonType": "MultiPolygon",
                         "GeometrySrid": 27700,
-                        "IdentifierColumn": "objectid",
+                        "IdentifierColumn": "gridcode",
                         "Properties": [
+                            "objectid",
                             "gridcode",
                             "moistcoverweight1519",
                             "moistcoverweight90",
@@ -295,6 +258,7 @@
             {
                 "Id": "carbon-values-uprn",
                 "Title": "Carbon Values - UPRN",
+                "CalculateNumberMatched": false,
                 "Extent": {
                     "Spatial": {
                         "Bbox": [
@@ -323,8 +287,9 @@
                         "GeometryDataType": "geometry",
                         "GeometryGeoJsonType": "Point",
                         "GeometrySrid": 27700,
-                        "IdentifierColumn": "objectid",
+                        "IdentifierColumn": "uprn",
                         "Properties": [
+                            "objectid",
                             "uprn",
                             "corcoef",
                             "devianceweighted",
@@ -347,6 +312,7 @@
             {
                 "Id": "evi-values-uprn",
                 "Title": "Ellenberg Vegetation Indicator Values - UPRN",
+                "CalculateNumberMatched": false,
                 "Extent": {
                     "Spatial": {
                         "Bbox": [
@@ -375,8 +341,9 @@
                         "GeometryDataType": "geometry",
                         "GeometryGeoJsonType": "Point",
                         "GeometrySrid": 27700,
-                        "IdentifierColumn": "objectid",
+                        "IdentifierColumn": "uprn",
                         "Properties": [
+                            "objectid",
                             "uprn",
                             "moistcoverweight1519",
                             "moistcoverweight90",
@@ -437,8 +404,9 @@
                         "GeometryDataType": "geometry",
                         "GeometryGeoJsonType": "MultiPolygon",
                         "GeometrySrid": 27700,
-                        "IdentifierColumn": "objectid",
+                        "IdentifierColumn": "fullgridid",
                         "Properties": [
+                            "objectid",
                             "fullgridid",
                             "msoa_numbe",
                             "r_hzz_cv1",
@@ -588,9 +556,10 @@
                         "GeometryDataType": "geometry",
                         "GeometryGeoJsonType": "MultiPolygon",
                         "GeometrySrid": 27700,
-                        "IdentifierColumn": "objectid",
+                        "IdentifierColumn": "lsoa11cd",
                         "Properties": [
                             "globalid",
+                            "objectid",
                             "lsoa11cd",
                             "lsoa11nm",
                             "sensitivityssfvi",
@@ -783,8 +752,9 @@
                         "GeometryDataType": "geometry",
                         "GeometryGeoJsonType": "MultiPolygon",
                         "GeometrySrid": 27700,
-                        "IdentifierColumn": "objectid",
+                        "IdentifierColumn": "msoa11cd",
                         "Properties": [
+                            "objectid",
                             "msoa11cd",
                             "msoa11nm",
                             "bornoutsideukireland",
@@ -855,8 +825,9 @@
                         "GeometryDataType": "geometry",
                         "GeometryGeoJsonType": "MultiPolygon",
                         "GeometrySrid": 27700,
-                        "IdentifierColumn": "objectid",
+                        "IdentifierColumn": "gridcode",
                         "Properties": [
+                            "objectid",
                             "gridcode",
                             "tas_rcp26_2019_10p",
                             "tas_rcp26_2019_50p",
@@ -1257,8 +1228,9 @@
                         "GeometryDataType": "geometry",
                         "GeometryGeoJsonType": "MultiPolygon",
                         "GeometrySrid": 27700,
-                        "IdentifierColumn": "objectid",
+                        "IdentifierColumn": "lsoa11cd",
                         "Properties": [
+                            "objectid",
                             "lsoa11cd",
                             "lsoa11nm",
                             "allpensioner_hh",
@@ -1357,8 +1329,9 @@
                         "GeometryDataType": "geometry",
                         "GeometryGeoJsonType": "MultiPolygon",
                         "GeometrySrid": 27700,
-                        "IdentifierColumn": "objectid",
+                        "IdentifierColumn": "lsoa11cd",
                         "Properties": [
+                            "objectid",
                             "globalid",
                             "lsoa11cd",
                             "lsoa11nm",

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
+using NDSH.Geospatial.Uprn.Service.Middleware.Utils;
 
 namespace NDSH.Geospatial.Uprn.Service.Middleware {
 
@@ -64,12 +65,12 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
           var features = root["features"] as JsonArray;
           if (features != null) {
             foreach (var feature in features.OfType<JsonObject>()) {
-              FilterProperties(feature, fields);
+              MiddlewareUtils.FilterProperties(feature, fields);
             }
           }
         }
         else {
-          FilterProperties(root, fields);
+          MiddlewareUtils.FilterProperties(root, fields);
         }
       }
 
@@ -78,16 +79,6 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
       context.Response.ContentType = "application/geo+json";
       await context.Response.WriteAsync(jsonDoc.ToJsonString());
 
-    }
-
-    void FilterProperties(JsonObject feature, HashSet<string> fields) {
-      if (feature.ContainsKey("properties") && feature["properties"] is JsonObject props) {
-        foreach (var key in props.Select(p => p.Key).ToList()) {
-          if (!fields.Contains(key)) {
-            props.Remove(key);
-          }
-        }
-      }
     }
   }
 }

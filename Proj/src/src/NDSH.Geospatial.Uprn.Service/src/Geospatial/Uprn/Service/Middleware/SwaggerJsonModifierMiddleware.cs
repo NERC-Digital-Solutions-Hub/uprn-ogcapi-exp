@@ -91,11 +91,36 @@ namespace NDSH.Geospatial.Uprn.Service.Middleware {
           }
         }
 
+        // Add relationSources to uprn/items/{featureId} endpoint
+        foreach (var pathKvp in doc.Paths.Where(p => p.Key.Contains("/uprn/items/"))) {
+          var pathItem = pathKvp.Value;
+          foreach (var op in pathItem.Operations.Values) {
+            if (!op.Parameters.Any(p => p.Name == "relationSources")) {
+              op.Parameters.Add(new OpenApiParameter {
+                Name = "relationSources",
+                In = ParameterLocation.Query,
+                Description = "Comma-separated list of relation sources to include related features from, e.g., 'carbon-values-uprn, evi-values-uprn'. Available for endpoints querying UPRN-based views.",
+                Required = false
+              });
+            }
+            if (!op.Parameters.Any(p => p.Name == "relationSourceFields")) {
+              op.Parameters.Add(new OpenApiParameter {
+                Name = "relationSourceFields",
+                In = ParameterLocation.Query,
+                Description = "Semicolon-separated list of comma-separated lists of fields to be included in the response for each relation. For example 'uprn,corcoef,grainsize;uprn,moistcoverweight90,moistcoverweightdiff'. Works only if relationSources is specified and the semicolon-separated lists must be in the same order as the relationSources.",
+                Required = false
+              });
+            }
+          }
+        }
+
         _cachedJson = doc.SerializeAsJson(Microsoft.OpenApi.OpenApiSpecVersion.OpenApi3_0);
+
       }
 
       context.Response.ContentType = "application/json";
       await context.Response.WriteAsync(_cachedJson);
+
     }
   }
 }
