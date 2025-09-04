@@ -33,6 +33,7 @@
 __pycache__
 node_modules
 obj
+bin
 *.pyHistory
 *.png~
 *.zip
