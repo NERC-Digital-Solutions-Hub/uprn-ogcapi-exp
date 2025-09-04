@@ -131,7 +131,7 @@
                         "GeometrySrid": 27700,
                         "IdentifierColumn": "gridcode",
                         "Properties": [
-                            "uprnid",
+                            "objectid",
                             "gridcode",
                             "shape_length",
                             "shape_area"
