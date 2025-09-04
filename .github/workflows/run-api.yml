@@ -19,13 +19,16 @@ jobs:
           dotnet-version: '9.0'
 
       - name: Restore dependencies
-        run: dotnet restore --project Proj/src/src/NDSH.Geospatial.Uprn.Service/src/NDSH.Geospatial.Uprn.Service.csproj
+        run: dotnet restore
+        working-directory: Proj/src/src/NDSH.Geospatial.Uprn.Service/src
 
       - name: Build
-        run: dotnet build --no-restore --project Proj/src/src/NDSH.Geospatial.Uprn.Service/src/NDSH.Geospatial.Uprn.Service.csproj
+        run: dotnet build --no-restore
+        working-directory: Proj/src/src/NDSH.Geospatial.Uprn.Service/src
 
       - name: Run API
-        run: nohup dotnet run --no-build --project Proj/src/src/NDSH.Geospatial.Uprn.Service/src/NDSH.Geospatial.Uprn.Service.csproj > api.log 2>&1 &
+        run: nohup dotnet run --no-build > api.log 2>&1 &
+        working-directory: Proj/src/src/NDSH.Geospatial.Uprn.Service/src
         env:
           ConnectionStrings__PostgresConnectionString: ${{ secrets.DB_CONNECTION_STRING }}
 
