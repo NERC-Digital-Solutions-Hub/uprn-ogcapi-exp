@@ -41,10 +41,6 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment()) {
   app.UseDeveloperExceptionPage();
-  app.Use(async (context, next) => {
-    context.Response.Headers.Append("Content-Security-Policy", "default-src 'self'");
-    await next();
-  });
 }
 
 app.UseSwaggerUI(swaggerOptions => {
