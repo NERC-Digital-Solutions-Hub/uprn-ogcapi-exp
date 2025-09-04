@@ -1,0 +1,55 @@
+name: Run ASP.NET Core Web API with Tunnel
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - ogcapi-count-exp
+
+jobs:
+  run-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0'
+
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: Proj/src/src/NDSH.Geospatial.Uprn.Service/src
+
+      - name: Build
+        run: dotnet build --no-restore
+        working-directory: Proj/src/src/NDSH.Geospatial.Uprn.Service/src
+
+      - name: Run API
+        run: nohup dotnet run --no-build > api.log 2>&1 &
+        working-directory: Proj/src/src/NDSH.Geospatial.Uprn.Service/src
+        env:
+          ConnectionStrings__PostgresConnectionString: ${{ secrets.DB_CONNECTION_STRING }}
+
+      - name: Install ngrok
+        run: |
+          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | \
+            sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null
+          echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | \
+            sudo tee /etc/apt/sources.list.d/ngrok.list
+          sudo apt update && sudo apt install ngrok
+
+      - name: Auth ngrok
+        run: ngrok config add-authtoken ${{ secrets.NGROK_AUTH_TOKEN }}
+
+      - name: Start tunnel
+        run: |
+          nohup ngrok http 5163 > ngrok.log 2>&1 &
+          sleep 5
+          curl --silent http://127.0.0.1:4040/api/tunnels | jq -r '.tunnels[0].public_url'
+
+      - name: Keep alive
+        run: |
+          echo "API and tunnel running. Job will stay alive for 5 hours (1 less than GitHub limit to make sure it does not get shut down)."
+          sleep 18000
