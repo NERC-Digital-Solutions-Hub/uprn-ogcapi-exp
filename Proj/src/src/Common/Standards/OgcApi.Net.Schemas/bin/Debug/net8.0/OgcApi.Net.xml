@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OgcApi.Net</name>
+    </assembly>
+    <members>
+        <member name="T:OgcApi.Net.Options.CollectionOptions">
+            <summary>
+            Information about the collection: id, title, features and tiles options, etc.
+            </summary>
+            <remarks>
+            Can be extended with inheritor  classes
+            </remarks>
+        </member>
+        <member name="P:OgcApi.Net.Options.CollectionOptions.Id">
+            <summary>
+            Unique identifier of the collection
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Options.CollectionOptions.Title">
+            <summary>
+            Title of the collection
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Options.CollectionOptions.Description">
+            <summary>
+            Description for the understanding of the collection. 
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Options.CollectionOptions.Extent">
+            <summary>
+            Extent of all spatial objects in the collection.
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Options.CollectionOptions.ItemType">
+            <summary>
+            An optional indicator about the type of the items in the collection (the default value, if the indicator is not provided, is 'feature')
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Options.CollectionOptions.CalculateNumberMatched">
+            <summary>
+            An optional indicator that specifies whether the number of items in the collection should be calculated (true) or not (false).
+            </summary>
+        </member>
+        <member name="T:OgcApi.Net.Options.Tiles.TileAccessDelegate">
+            <summary>
+            Returns true when access to tile is granted according to the given parameters, otherwise returns false
+            </summary>
+            <param name="collectionId"></param>
+            <param name="tileMatrix"></param>
+            <param name="tileRow"></param>
+            <param name="tileCol"></param>
+            <param name="apiKey"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OgcApi.Net.Options.Tiles.FeatureAccessDelegate">
+            <summary>
+            Returns true when access to feature is granted according to the given parameters, otherwise returns false
+            </summary>
+            <param name="collectionId"></param>
+            <param name="feature"></param>
+            <param name="apiKey"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OgcApi.Net.Resources.Collections">
+            <summary>
+            Provides information about and access to the collections
+            </summary>
+        </member>
+        <member name="T:OgcApi.Net.Resources.Conformance">
+            <summary>
+            The conformance classes from standards or community specifications
+            </summary>
+        </member>
+        <member name="T:OgcApi.Net.Resources.LandingPage">
+            <summary>
+            The Landing page provides links to:
+            <list type="bullet">
+                <item>
+                    <description>the API definition</description>
+                </item>
+                <item>
+                    <description>the Conformance declaration (path /conformance)</description>
+                </item>
+                <item>
+                    <description>the Collections (path /collections)</description>
+                </item>    
+            </list>
+            </summary>    
+        </member>
+    </members>
+</doc>

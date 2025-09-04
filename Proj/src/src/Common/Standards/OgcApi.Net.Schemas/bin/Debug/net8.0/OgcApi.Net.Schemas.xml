@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OgcApi.Net.Schemas</name>
+    </assembly>
+    <members>
+        <member name="T:OgcApi.Net.Schemas.Options.PropertyDescription">
+            <summary>
+            Information about collection property description
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Schemas.Options.PropertyDescription.Type">
+            <summary>
+            Type of the property, except for spatial.<br/>
+            The standard recommends using one of the following:<br/>
+            <c>string</c> (string or temporal properties), <c>number</c>, <c>integer</c>, <c>boolean</c>,
+            <c>object</c> or <c>array</c> (consist of items that are strings or numbers).<br/>
+            Spatial (geometry) property shall specify <see cref="P:OgcApi.Net.Schemas.Options.PropertyDescription.Format"/>.
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Schemas.Options.PropertyDescription.Title">
+            <summary>
+            Human-readable title for the property
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Schemas.Options.PropertyDescription.Description">
+            <summary>
+            Description for the understanding of the property
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Schemas.Options.PropertyDescription.XOgcRole">
+            <summary>
+            <c>x-ogc-role</c>, custom OGC role (<c>id</c>, <c>primary-geometry</c>, <c>type</c>, etc.)
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Schemas.Options.PropertyDescription.Format">
+            <summary>
+            Format of the <c>string</c> or <c>spatial</c> property.<br/>
+            For string property the Standard recommends using one of the following:<br/>
+            <c>uri</c>, <c>uri-template</c>, <c>uuid</c>, <c>date-time</c>, <c>date</c>, <c>time</c>, etc.<br/>
+            For <c>spatial</c> (<c>geometry</c>) property is one of:<br/>
+            <c>geometry-point</c>, <c>geometry-multipoint</c>, <c>geometry-linestring</c>,
+            <c>geometry-multilinestring</c>, <c>geometry-polygon</c>, <c>geometry-multipolygon</c>, 
+            <c>geometry-geometrycollection</c>, <c>geometry-any</c>
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Schemas.Options.PropertyDescription.XOgcPropertySeq">
+            <summary>
+            Specific relative position of the property.
+            </summary>
+        </member>
+        <member name="T:OgcApi.Net.Schemas.Options.SchemaCollectionOptions">
+            <summary>
+            Extends <see cref="T:OgcApi.Net.Options.CollectionOptions"/> adding OGC Schemas support.<br/>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Schemas.Options.SchemaCollectionOptions.SchemaOptions">
+            <summary>
+            Information about collection and its properties
+            </summary>
+        </member>
+        <member name="T:OgcApi.Net.Schemas.Options.SchemaOptions">
+            <summary>
+            Information about collection and its properties
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Schemas.Options.SchemaOptions.Title">
+            <summary>
+            Title of the collection. Usually same as <see cref="P:OgcApi.Net.Options.CollectionOptions.Title"/>
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Schemas.Options.SchemaOptions.Description">
+            <summary>
+            Description of the collection. Usually same as <see cref="P:OgcApi.Net.Options.CollectionOptions.Description"/>
+            </summary>
+        </member>
+        <member name="P:OgcApi.Net.Schemas.Options.SchemaOptions.AdditionalProperties">
+            <summary>
+            Indicates whether additional properties, not listed in <see cref="P:OgcApi.Net.Schemas.Options.SchemaOptions.Properties"/>, are allowed in feature objects.
+            </summary>
+            <remarks>
+            If set to <c>false</c>, properties that are not explicitly declared in the schema SHALL NOT be allowed, otherwise they SHALL be allowed. Default - <c>true</c>
+            </remarks>
+        </member>
+        <member name="P:OgcApi.Net.Schemas.Options.SchemaOptions.Properties">
+            <summary>
+            Dictionary mapping property names to their <see cref="T:OgcApi.Net.Schemas.Options.PropertyDescription">options</see>
+            </summary>
+        </member>
+    </members>
+</doc>
