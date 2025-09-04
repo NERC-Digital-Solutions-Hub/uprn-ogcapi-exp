@@ -25,9 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\ogcapi-count-exp\Proj\src\src\Common\OgcApi.Net\OgcApi.Net.csproj" />
-    <ProjectReference Include="..\..\..\..\..\..\ogcapi-count-exp\Proj\src\src\Common\Standards\OgcApi.Net.Schemas\OgcApi.Net.Schemas.csproj" />
-    <ProjectReference Include="..\..\..\..\..\..\ogcapi-count-exp\Proj\src\src\Providers\OgcApi.Net.PostGis\OgcApi.Net.PostGis.csproj" />
+    <ProjectReference Include="..\..\Common\OgcApi.Net\OgcApi.Net.csproj" />
+    <ProjectReference Include="..\..\Common\Standards\OgcApi.Net.Schemas\OgcApi.Net.Schemas.csproj" />
+    <ProjectReference Include="..\..\Providers\OgcApi.Net.PostGis\OgcApi.Net.PostGis.csproj" />
   </ItemGroup>
 
 </Project>
