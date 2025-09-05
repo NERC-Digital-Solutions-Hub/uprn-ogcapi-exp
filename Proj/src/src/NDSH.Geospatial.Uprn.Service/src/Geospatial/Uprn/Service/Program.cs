@@ -43,6 +43,11 @@ if (app.Environment.IsDevelopment()) {
   app.UseDeveloperExceptionPage();
 }
 
+app.Use(async (context, next) => {
+  context.Response.Headers.Append("Content-Sercurity-Policy", "default-src 'self'; font-src 'self' https: data:;");
+  await next();
+});
+
 app.UseSwaggerUI(swaggerOptions => {
   swaggerOptions.RoutePrefix = "api";
   swaggerOptions.SwaggerEndpoint("ogc/swagger.json", "OGC API");
