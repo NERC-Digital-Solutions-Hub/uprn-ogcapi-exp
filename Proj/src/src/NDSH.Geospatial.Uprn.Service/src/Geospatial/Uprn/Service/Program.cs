@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -42,6 +43,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment()) {
   app.UseDeveloperExceptionPage();
 }
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions {
+  ForwardedHeaders = ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedFor
+});
 
 app.UseSwaggerUI(swaggerOptions => {
   swaggerOptions.RoutePrefix = "api";
