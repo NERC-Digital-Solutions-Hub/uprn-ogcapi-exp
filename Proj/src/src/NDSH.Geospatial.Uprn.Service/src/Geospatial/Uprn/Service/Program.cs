@@ -43,11 +43,6 @@ if (app.Environment.IsDevelopment()) {
   app.UseDeveloperExceptionPage();
 }
 
-app.Use(async (context, next) => {
-  context.Response.Headers.Append("Content-Sercurity-Policy", "default-src 'self'; font-src 'self' https: data:;");
-  await next();
-});
-
 app.UseSwaggerUI(swaggerOptions => {
   swaggerOptions.RoutePrefix = "api";
   swaggerOptions.SwaggerEndpoint("ogc/swagger.json", "OGC API");
@@ -70,5 +65,22 @@ app.MapControllers();
 app.UseCors("OgcApi");
 
 app.UseAuthorization();
+
+app.Use(async (context, next) => {
+  await next();
+
+  if (context.Response.Headers.TryGetValue("Content-Security-Policy", out var csp)) {
+    var existingPolicy = csp.ToString();
+
+    if (!existingPolicy.Contains("font-src")) {
+      var newPolicy = existingPolicy.TrimEnd(';') + "; font-src 'self' https: data:";
+      context.Response.Headers.Remove("Content-Security-Policy");
+      context.Response.Headers.Append("Content-Security-Policy", newPolicy);
+    }
+  }
+  else {
+    context.Response.Headers.Append("Content-Security-Policy", "default-src 'self'; font-src 'self' https: data:");
+  }
+});
 
 app.Run();
