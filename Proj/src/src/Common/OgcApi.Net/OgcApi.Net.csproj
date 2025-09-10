@@ -24,11 +24,13 @@
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
 	  <PackageFlatten>true</PackageFlatten>
 	</Content>
+  <!---
 	<Content Include="OgcApi.Net.xml">
 	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
 	  <PackageFlatten>true</PackageFlatten>
 	</Content>
+  -->
   </ItemGroup>
 
   <ItemGroup>
