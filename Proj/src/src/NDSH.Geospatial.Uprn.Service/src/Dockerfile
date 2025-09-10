@@ -12,15 +12,30 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/NDSH.Geospatial.Uprn.Service/src/NDSH.Geospatial.Uprn.Service/NDSH.Geospatial.Uprn.Service.csproj", "src/NDSH.Geospatial.Uprn.Service/src/NDSH.Geospatial.Uprn.Service/"]
-RUN dotnet restore "./src/NDSH.Geospatial.Uprn.Service/src/NDSH.Geospatial.Uprn.Service/NDSH.Geospatial.Uprn.Service.csproj"
-COPY . .
-WORKDIR "/src/src/NDSH.Geospatial.Uprn.Service/src/NDSH.Geospatial.Uprn.Service"
+COPY ["Common/OgcApi.Net/OgcApi.Net.csproj", "./Common/OgcApi.Net/"]
+COPY ["Common/OgcApi.Net/OgcApi.Net.Features.csproj", "./Common/OgcApi.Net/"]
+COPY ["Common/Standards/OgcApi.Net.Schemas/OgcApi.Net.Schemas.csproj", "./Common/Standards/OgcApi.Net.Schemas/"]
+COPY ["Providers/OgcApi.Net.MbTiles/OgcApi.Net.MbTiles.csproj", "./Providers/OgcApi.Net.MbTiles/"]
+COPY ["Providers/OgcApi.Net.PostGis/OgcApi.Net.PostGis.csproj", "./Providers/OgcApi.Net.PostGis/"]
+COPY ["Providers/OgcApi.Net.SpatiaLite/OgcApi.Net.SpatiaLite.csproj", "./Providers/OgcApi.Net.SpatiaLite/"]
+COPY ["Providers/OgcApi.Net.SqlServer/OgcApi.Net.SqlServer.csproj", "./Providers/OgcApi.Net.SqlServer/"]
+COPY ["NDSH.Geospatial.Uprn.Service/src/NDSH.Geospatial.Uprn.Service.csproj", "./NDSH.Geospatial.Uprn.Service/src/"]
+WORKDIR "/src/NDSH.Geospatial.Uprn.Service/src"
+RUN apt-get update && apt-get install -y tree && tree /src
+RUN dotnet restore ./NDSH.Geospatial.Uprn.Service.csproj
+
+WORKDIR /src
+COPY Common ./Common
+COPY Providers ./Providers
+COPY NDSH.Geospatial.Uprn.Service/src ./NDSH.Geospatial.Uprn.Service/src
+WORKDIR /src/NDSH.Geospatial.Uprn.Service/src
+RUN tree /src
 RUN dotnet build "./NDSH.Geospatial.Uprn.Service.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
+RUN tree /app
 RUN dotnet publish "./NDSH.Geospatial.Uprn.Service.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
