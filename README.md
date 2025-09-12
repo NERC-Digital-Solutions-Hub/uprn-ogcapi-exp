@@ -54,5 +54,3 @@ docker run -e ConnectionStrings__PostgresConnectionString="Server=url-of-databas
 ```
 
 This way the API will listen on the HTTP 8080 port.
-
-_Note_: The current implementation works with the local presence of the `Common` and `Providers` folders of `OgcApi.Net`, which is only temporary until a PR can be made to accommodate the necessary changes detailed above. Once that is done, both the `Dockerfile` and the reference structure will be a lot easier to manage, as there will be no need for the management of the folder structure, only the `NDSH.Geospatial.Uprn.Service` project will be used.
