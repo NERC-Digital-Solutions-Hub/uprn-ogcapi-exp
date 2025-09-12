@@ -1,10 +1,6 @@
 name: Run ASP.NET Core Web API with Tunnel
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - ogcapi-count-exp
+on: workflow_dispatch
 
 jobs:
   run-api:
