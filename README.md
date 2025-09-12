@@ -41,8 +41,8 @@ This implementation relies on changes to OgcApi.Net that are not yet part of the
 The app is containerised using the `Dockerfile` in the `NDSH.Geospatial.Uprn.Service` folder. It takes care of the dependencies, the build, and the publishing of the app. The way to build the app is as follows:
 
 ```powershell
-cd C:\NDSH\GitHub\uprn-ogcapi-exp\ogcapi-count-exp\Proj\src\src
-docker build --no-cache -t uprn-api -f NDSH.Geospatial.Uprn.Service\src\Dockerfile .
+cd C:\NDSH\GitHub\uprn-ogcapi-exp\ogcapi-count-exp\Proj\src\src\NDSH.Geospatial.Uprn.Service\src
+docker build --no-cache -t uprn-api -f Dockerfile .
 ```
 
 Once successfully built, the `docker images` command can be used to verify its existence.

@@ -12,23 +12,11 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Common/OgcApi.Net/OgcApi.Net.csproj", "./Common/OgcApi.Net/"]
-COPY ["Common/OgcApi.Net/OgcApi.Net.Features.csproj", "./Common/OgcApi.Net/"]
-COPY ["Common/Standards/OgcApi.Net.Schemas/OgcApi.Net.Schemas.csproj", "./Common/Standards/OgcApi.Net.Schemas/"]
-COPY ["Providers/OgcApi.Net.MbTiles/OgcApi.Net.MbTiles.csproj", "./Providers/OgcApi.Net.MbTiles/"]
-COPY ["Providers/OgcApi.Net.PostGis/OgcApi.Net.PostGis.csproj", "./Providers/OgcApi.Net.PostGis/"]
-COPY ["Providers/OgcApi.Net.SpatiaLite/OgcApi.Net.SpatiaLite.csproj", "./Providers/OgcApi.Net.SpatiaLite/"]
-COPY ["Providers/OgcApi.Net.SqlServer/OgcApi.Net.SqlServer.csproj", "./Providers/OgcApi.Net.SqlServer/"]
-COPY ["NDSH.Geospatial.Uprn.Service/src/NDSH.Geospatial.Uprn.Service.csproj", "./NDSH.Geospatial.Uprn.Service/src/"]
-WORKDIR "/src/NDSH.Geospatial.Uprn.Service/src"
+COPY NDSH.Geospatial.Uprn.Service.csproj .
 RUN apt-get update && apt-get install -y tree && tree /src
 RUN dotnet restore ./NDSH.Geospatial.Uprn.Service.csproj
 
-WORKDIR /src
-COPY Common ./Common
-COPY Providers ./Providers
-COPY NDSH.Geospatial.Uprn.Service/src ./NDSH.Geospatial.Uprn.Service/src
-WORKDIR /src/NDSH.Geospatial.Uprn.Service/src
+COPY . .
 RUN tree /src
 RUN dotnet build "./NDSH.Geospatial.Uprn.Service.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
