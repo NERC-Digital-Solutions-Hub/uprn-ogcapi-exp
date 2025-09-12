@@ -34,4 +34,25 @@ In this experimental solution, the following endpoints have been changed:
 
 ## OgcApi.Net changes
 
-This implementation relies on changes to OgcApi.Net that are not yet part of the original package and only exist in a fork. The change impacts the way OgcApi.Net implemented the `numberMatched` response element in their original code. The `numberMatched` element is used to check if a next page link is to be inserted into the response, which happens when `numberMatched` is greater than the sum of `offset` and `limit`. To know this, after a successful query, PostGIS runs `COUNT(*)` on the result and returns the value. While this is a straightforward operation, the calculation can be prohibitively expensive on large tables, such as the uprn table in our database, which contains more than 40 million rows. Thus, `/collections/{collectionId}/items` endpoints would frequently fail, especially on the uprn table, due to timeouts. The solution proposed to this is to fetch one more 
+This implementation relies on changes to OgcApi.Net that are not yet part of the original package and only exist in a fork. The change impacts the way OgcApi.Net implemented the `numberMatched` response element in their original code. The `numberMatched` element is used to check if a next page link is to be inserted into the response, which happens when `numberMatched` is greater than the sum of `offset` and `limit`. To know this, after a successful query, PostGIS runs `COUNT(*)` on the result and returns the value. While this is a straightforward operation, the calculation can be prohibitively expensive on large tables, such as the uprn table in our database, which contains more than 40 million rows. Thus, `/collections/{collectionId}/items` endpoints would frequently fail, especially on the uprn table, due to timeouts. The solution proposed to this is to set an internal limit to one more than the user-specified one, then check if it's filled with the returned value. If so, only the user-specified number of features will be returned but a next link will be added.
+
+## Containerisation
+
+The app is containerised using the `Dockerfile` in the `NDSH.Geospatial.Uprn.Service` folder. It takes care of the dependencies, the build, and the publishing of the app. The way to build the app is as follows:
+
+```powershell
+cd C:\NDSH\GitHub\uprn-ogcapi-exp\ogcapi-count-exp\Proj\src\src\NDSH.Geospatial.Uprn.Service\src
+docker build --no-cache -t uprn-api -f Dockerfile .
+```
+
+Once successfully built, the `docker images` command can be used to verify its existence.
+
+To run the dockerised API, execute the following command in the directory the build command was run from in powershell:
+
+```powershell
+docker run -e ConnectionStrings__PostgresConnectionString="Server=url-of-database;Database=database-name;User Id=user-id;Password=user-password;" -p 8080:8080 uprn-api:latest
+```
+
+This way the API will listen on the HTTP 8080 port.
+
+_Note_: The current implementation works with the local presence of the `Common` and `Providers` folders of `OgcApi.Net`, which is only temporary until a PR can be made to accommodate the necessary changes detailed above. Once that is done, both the `Dockerfile` and the reference structure will be a lot easier to manage, as there will be no need for the management of the folder structure, only the `NDSH.Geospatial.Uprn.Service` project will be used.

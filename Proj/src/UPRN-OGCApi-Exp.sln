@@ -27,26 +27,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDSH.Geospatial.Uprn", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDSH.Geospatial.Uprn.Service", "src\NDSH.Geospatial.Uprn.Service\src\NDSH.Geospatial.Uprn.Service.csproj", "{61C5B36C-362E-8464-733E-89C7B8AD6DA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgcApi.Net", "..\..\..\ogcapi-count-exp\Proj\src\src\Common\OgcApi.Net\OgcApi.Net.csproj", "{AE99EAD3-AC59-4DEA-A65F-E107CBCAC3E9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{BF78F24C-5A83-4CE5-85EB-8FA5619B9CC5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Standards", "Standards", "{565B1254-6B22-4BDA-A2F2-F329C3D0B1E7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgcApi.Net.Schemas", "..\..\..\ogcapi-count-exp\Proj\src\src\Common\Standards\OgcApi.Net.Schemas\OgcApi.Net.Schemas.csproj", "{E3BA4175-F31F-409F-8E0D-8F3FD1D084D7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgcApi.Net.Features", "..\..\..\ogcapi-count-exp\Proj\src\src\Common\OgcApi.Net\OgcApi.Net.Features.csproj", "{925A49D0-58D4-4A2B-B87A-8D49B23848FE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{5A44A732-EF47-4486-A0CC-3A213759D0F5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgcApi.Net.MbTiles", "..\..\..\ogcapi-count-exp\Proj\src\src\Providers\OgcApi.Net.MbTiles\OgcApi.Net.MbTiles.csproj", "{E161A0F8-C9E5-433E-B5A1-0B9E8C79DB80}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgcApi.Net.PostGis", "..\..\..\ogcapi-count-exp\Proj\src\src\Providers\OgcApi.Net.PostGis\OgcApi.Net.PostGis.csproj", "{6D001CB1-0F84-4827-806A-958B41E11902}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgcApi.Net.SpatiaLite", "..\..\..\ogcapi-count-exp\Proj\src\src\Providers\OgcApi.Net.SpatiaLite\OgcApi.Net.SpatiaLite.csproj", "{B92662C5-C8A4-4288-8AB6-251B6A026944}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgcApi.Net.SqlServer", "..\..\..\ogcapi-count-exp\Proj\src\src\Providers\OgcApi.Net.SqlServer\OgcApi.Net.SqlServer.csproj", "{4B825BC0-4E68-428F-B0FE-4A2B1C14729D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,47 +81,9 @@ Global
 		{61C5B36C-362E-8464-733E-89C7B8AD6DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61C5B36C-362E-8464-733E-89C7B8AD6DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61C5B36C-362E-8464-733E-89C7B8AD6DA9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE99EAD3-AC59-4DEA-A65F-E107CBCAC3E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE99EAD3-AC59-4DEA-A65F-E107CBCAC3E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE99EAD3-AC59-4DEA-A65F-E107CBCAC3E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE99EAD3-AC59-4DEA-A65F-E107CBCAC3E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3BA4175-F31F-409F-8E0D-8F3FD1D084D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3BA4175-F31F-409F-8E0D-8F3FD1D084D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3BA4175-F31F-409F-8E0D-8F3FD1D084D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3BA4175-F31F-409F-8E0D-8F3FD1D084D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{925A49D0-58D4-4A2B-B87A-8D49B23848FE}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{925A49D0-58D4-4A2B-B87A-8D49B23848FE}.Debug|Any CPU.Build.0 = Debug|x86
-		{925A49D0-58D4-4A2B-B87A-8D49B23848FE}.Release|Any CPU.ActiveCfg = Debug|x86
-		{925A49D0-58D4-4A2B-B87A-8D49B23848FE}.Release|Any CPU.Build.0 = Debug|x86
-		{E161A0F8-C9E5-433E-B5A1-0B9E8C79DB80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E161A0F8-C9E5-433E-B5A1-0B9E8C79DB80}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E161A0F8-C9E5-433E-B5A1-0B9E8C79DB80}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E161A0F8-C9E5-433E-B5A1-0B9E8C79DB80}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D001CB1-0F84-4827-806A-958B41E11902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D001CB1-0F84-4827-806A-958B41E11902}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D001CB1-0F84-4827-806A-958B41E11902}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D001CB1-0F84-4827-806A-958B41E11902}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B92662C5-C8A4-4288-8AB6-251B6A026944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B92662C5-C8A4-4288-8AB6-251B6A026944}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B92662C5-C8A4-4288-8AB6-251B6A026944}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B92662C5-C8A4-4288-8AB6-251B6A026944}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4B825BC0-4E68-428F-B0FE-4A2B1C14729D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B825BC0-4E68-428F-B0FE-4A2B1C14729D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4B825BC0-4E68-428F-B0FE-4A2B1C14729D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4B825BC0-4E68-428F-B0FE-4A2B1C14729D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{AE99EAD3-AC59-4DEA-A65F-E107CBCAC3E9} = {BF78F24C-5A83-4CE5-85EB-8FA5619B9CC5}
-		{565B1254-6B22-4BDA-A2F2-F329C3D0B1E7} = {BF78F24C-5A83-4CE5-85EB-8FA5619B9CC5}
-		{E3BA4175-F31F-409F-8E0D-8F3FD1D084D7} = {565B1254-6B22-4BDA-A2F2-F329C3D0B1E7}
-		{925A49D0-58D4-4A2B-B87A-8D49B23848FE} = {BF78F24C-5A83-4CE5-85EB-8FA5619B9CC5}
-		{E161A0F8-C9E5-433E-B5A1-0B9E8C79DB80} = {5A44A732-EF47-4486-A0CC-3A213759D0F5}
-		{6D001CB1-0F84-4827-806A-958B41E11902} = {5A44A732-EF47-4486-A0CC-3A213759D0F5}
-		{B92662C5-C8A4-4288-8AB6-251B6A026944} = {5A44A732-EF47-4486-A0CC-3A213759D0F5}
-		{4B825BC0-4E68-428F-B0FE-4A2B1C14729D} = {5A44A732-EF47-4486-A0CC-3A213759D0F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1278484C-6291-4635-A846-795A83B3EDE6}
